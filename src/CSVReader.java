@@ -12,7 +12,7 @@ public class CSVReader {
     if (!new File(filename).exists())
       throw new IOException();
     reader = new BufferedReader(new FileReader(filename));
-    currentLine = reader.readLine();
+    readNextLine();
   }
 
   public boolean hasNext() {
@@ -20,6 +20,10 @@ public class CSVReader {
   }
   
   public void next() throws IOException {
+    readNextLine();
+  }
+
+  void readNextLine() throws IOException {
     currentLine = reader.readLine();
   }
 }

@@ -5,9 +5,31 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CSVReaderTest {
+    private String filename;
+    private BufferedWriter writer;
+
+    /**
+     * Creamos un archivo.
+     * @throws IOException
+     */
+    @Before
+    public void setUp() throws IOException {
+        filename = "CSVReaderTest.tmp.csv";
+        writer = new BufferedWriter(new FileWriter(filename));
+    }
+
+    /**
+     * Borramos el Archivo.
+     */
+    @After
+    public void tearDown() {
+        new File(filename).delete();
+    }
 
     /**
      * Prueba la no existencia del archivo
@@ -25,27 +47,18 @@ public class CSVReaderTest {
 
     @Test
     public void testCreacionArchivoVacio() throws IOException {
-        // Creamos un archivo
-        String filename = "CSVReaderTest.tmp.csv";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-        writer.close();
-
         // Verificamos que no tenga registros.
-        CSVReader reader = new CSVReader(filename);
+        CSVReader reader = getReaderAndCloseWriter();
         assertTrue(!reader.hasNext());
-        new File(filename).delete();
     }
 
     @Test
     public void testLeerUnSoloRegistro() throws IOException {
         // Creamos un archivo con un registro
-        String filename = "CSVReaderTest.tmp.csv";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
         writer.write("registro unico", 0, 14);
         writer.write("\r\n", 0, 2);
-        writer.close();
 
-        CSVReader reader = new CSVReader(filename);
+        CSVReader reader = getReaderAndCloseWriter();
         // Verificamos que tenga registros.
         assertTrue(reader.hasNext());
         // Leemos el siguiente registro
@@ -53,7 +66,11 @@ public class CSVReaderTest {
         // Verificamos que no tenga registros.
         assertTrue(!reader.hasNext());
         // Borramos el Archivo
-        new File(filename).delete();
+    }
+
+    CSVReader getReaderAndCloseWriter() throws IOException {
+        writer.close();
+        return new CSVReader(filename);
     }
 
 }
