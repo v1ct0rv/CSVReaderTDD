@@ -23,7 +23,13 @@ public class CSVReader {
   
   public List<String> next() throws IOException {
     List<String> columns = new ArrayList<String>();
+    int commaIndex = currentLine.indexOf(",");
+    if (commaIndex == -1)
     columns.add(currentLine);
+    else {
+      columns.add(currentLine.substring(0, commaIndex));
+      columns.add(currentLine.substring(commaIndex + 1));
+    }
     readNextLine();
     return columns;
   }

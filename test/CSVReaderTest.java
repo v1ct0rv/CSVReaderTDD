@@ -93,4 +93,14 @@ public class CSVReaderTest {
         writer.write("\r\n", 0, 2);
     }
 
+    @Test
+    public void testDosColumnas() throws IOException {
+        writeln("column 1,column 2");
+        CSVReader reader = getReaderAndCloseWriter();
+        List<String> columns = reader.next();
+        assertEquals(2, columns.size());
+        assertEquals("column 1", columns.get(0));
+        assertEquals("column 2", columns.get(1));
+    }
+
 }
