@@ -1,13 +1,14 @@
 
+import java.io.File;
 import java.io.IOException;
 
 public class CSVReader {
   public CSVReader(String filename) throws IOException {
-    throw new IOException();
+    if (!new File(filename).exists())
+      throw new IOException();
   }
 
   public boolean hasNext() {
     return false;
   }
 }
-
