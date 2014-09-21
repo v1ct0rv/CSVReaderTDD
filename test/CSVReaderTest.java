@@ -1,9 +1,11 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,6 +17,7 @@ public class CSVReaderTest {
 
     /**
      * Creamos un archivo.
+     * 
      * @throws IOException
      */
     @Before
@@ -62,7 +65,9 @@ public class CSVReaderTest {
         // Verificamos que tenga registros.
         assertTrue(reader.hasNext());
         // Leemos el siguiente registro
-        reader.next();
+        List<String> columns = reader.next();
+        assertEquals(1, columns.size());
+        assertEquals("registro unico", columns.get(0));
         // Verificamos que no tenga registros.
         assertTrue(!reader.hasNext());
         // Borramos el Archivo

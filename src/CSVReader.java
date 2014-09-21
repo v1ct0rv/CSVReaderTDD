@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CSVReader {
   private BufferedReader reader;
@@ -19,8 +21,12 @@ public class CSVReader {
     return currentLine != null; 
   }
   
-  public void next() throws IOException {
+  public List<String> next() throws IOException {
     readNextLine();
+    List<String> columns = new ArrayList<String>();
+    columns.add("registro unico");
+    return columns;
+
   }
 
   void readNextLine() throws IOException {
