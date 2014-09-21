@@ -102,5 +102,30 @@ public class CSVReaderTest {
         assertEquals("column 1", columns.get(0));
         assertEquals("column 2", columns.get(1));
     }
+    
+    @Test
+    public void testVariasColumnas() throws IOException {
+        writeln("column 1,column 2,column 3,column 4,column 5,column 6,column 7");
+        CSVReader reader = getReaderAndCloseWriter();
+        List<String> columns = reader.next();
+        assertEquals(7, columns.size());
+        assertEquals("column 1", columns.get(0));
+        assertEquals("column 2", columns.get(1));
+        assertEquals("column 3", columns.get(2));
+        assertEquals("column 4", columns.get(3));
+        assertEquals("column 5", columns.get(4));
+        assertEquals("column 6", columns.get(5));
+        assertEquals("column 7", columns.get(6));
+    }
+    
+    @Test
+    public void testTrimColumnas() throws IOException {
+        writeln("column 1  ,  column 2");
+        CSVReader reader = getReaderAndCloseWriter();
+        List<String> columns = reader.next();
+        assertEquals(2, columns.size());
+        assertEquals("column 1", columns.get(0));
+        assertEquals("column 2", columns.get(1));
+    }
 
 }
