@@ -22,9 +22,9 @@ public class CSVReader {
   }
   
   public List<String> next() throws IOException {
-    readNextLine();
     List<String> columns = new ArrayList<String>();
-    columns.add("registro unico");
+    columns.add(currentLine);
+    readNextLine();
     return columns;
   }
 
