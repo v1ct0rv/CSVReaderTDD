@@ -26,7 +26,6 @@ public class CSVReader {
     List<String> columns = new ArrayList<String>();
     columns.add("registro unico");
     return columns;
-
   }
 
   void readNextLine() throws IOException {

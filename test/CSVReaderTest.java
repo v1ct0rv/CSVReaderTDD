@@ -57,9 +57,8 @@ public class CSVReaderTest {
 
     @Test
     public void testLeerUnSoloRegistro() throws IOException {
-        // Creamos un archivo con un registro
-        writer.write("registro unico", 0, 14);
-        writer.write("\r\n", 0, 2);
+        // Insertamos un registro
+        writeln("registro unico");
 
         CSVReader reader = getReaderAndCloseWriter();
         // Verificamos que tenga registros.
@@ -76,6 +75,22 @@ public class CSVReaderTest {
     CSVReader getReaderAndCloseWriter() throws IOException {
         writer.close();
         return new CSVReader(filename);
+    }
+
+    @Test
+    public void testLeerDosRegistros() throws IOException {
+        writeln("registro 1");
+        writeln("registro 2");
+        CSVReader reader = getReaderAndCloseWriter();
+        reader.next();
+        List<String> columns = reader.next();
+        assertEquals(1, columns.size());
+        assertEquals("registro 2", columns.get(0));
+    }
+
+    void writeln(String string) throws IOException {
+        writer.write(string, 0, string.length());
+        writer.write("\r\n", 0, 2);
     }
 
 }
