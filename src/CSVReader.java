@@ -1,8 +1,7 @@
-
 import java.io.IOException;
 
 public class CSVReader {
-  public CSVReader(String filename) throws IOException {
-  }
+    public CSVReader(String filename) throws IOException {
+        throw new IOException();
+    }
 }
-
