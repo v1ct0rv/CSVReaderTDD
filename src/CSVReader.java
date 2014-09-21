@@ -11,4 +11,8 @@ public class CSVReader {
   public boolean hasNext() {
     return false;
   }
+  
+  public void next() throws IOException {
+  }
 }
+
