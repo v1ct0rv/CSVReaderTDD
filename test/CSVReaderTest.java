@@ -52,7 +52,6 @@ public class CSVReaderTest {
         reader.next();
         // Verificamos que no tenga registros.
         assertTrue(!reader.hasNext());
-
         // Borramos el Archivo
         new File(filename).delete();
     }
